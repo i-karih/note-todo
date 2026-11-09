@@ -1,8 +1,8 @@
 <script setup lang="ts">
 	import type { CheckboxProps, CheckboxSlots } from './Checkbox.types'
 
-	import CheckboxPrimitive from './CheckboxPrimitive.vue'
 	import { UIIcon } from '../Icon'
+	import CheckboxPrimitive from './CheckboxPrimitive.vue'
 
 	const model = defineModel<boolean>()
 

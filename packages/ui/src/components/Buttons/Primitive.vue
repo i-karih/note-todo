@@ -42,7 +42,7 @@
 			}
 		return {
 			type,
-			disabled: disabled || loading || undefined
+			disabled: disabled || loading || undefined,
 		}
 	})
 </script>

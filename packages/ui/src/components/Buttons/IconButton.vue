@@ -1,9 +1,8 @@
 <script setup lang="ts">
 	import type { IconButtonProps } from './IconButton.types'
 
-	import { UIIcon } from '../Icon'
-	import InlineButton from './InlineButton.vue'
-	import Primitive from "./Primitive.vue";
+	import { Icon } from '../Icon/Icon.vue'
+	import Primitive from './Primitive.vue'
 
 	const {
 		name,
@@ -19,10 +18,7 @@
 
 <template>
 	<Primitive
-		:class="[
-			'ui-icon-button',
-			`ui-icon-button--${variant}`,
-		]"
+		:class="['ui-icon-button', `ui-icon-button--${variant}`]"
 		:variant="variant"
 		:to="to"
 		:href="href"
@@ -30,7 +26,7 @@
 		:type="type"
 		:disabled="disabled"
 	>
-		<UIIcon :size="size" :name="name" />
+		<Icon :size="size" :name="name" />
 	</Primitive>
 </template>
 
@@ -66,6 +62,5 @@
 				background-color: var(--bg-active);
 			}
 		}
-
 	}
 </style>

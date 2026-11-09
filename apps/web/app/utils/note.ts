@@ -11,3 +11,6 @@ export const createEmptyNote = (): Note => ({
 	title: '',
 	tasks: [createEmptyTask()],
 })
+
+// eslint-disable-next-line unicorn/prefer-structured-clone -- structuredClone не умеет клонировать реактивные Proxy Vue
+export const cloneNote = (note: Note): Note => JSON.parse(JSON.stringify(note))

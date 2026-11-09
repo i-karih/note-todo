@@ -1,10 +1,9 @@
 <script setup lang="ts">
-	import { UICard, UIIconButton, UIButton } from "@note-todo/ui";
+	import { UICard, UIIconButton, UIButton } from '@note-todo/ui'
 
 	import { useNotesStore } from '~/stores/notes.ts'
 
 	const notesStore = useNotesStore()
-
 </script>
 
 <template>
@@ -12,10 +11,9 @@
 		<div class="container">
 			<div class="todo__header">
 				<h1 class="todo__title text-display">Мои заметки</h1>
-				<UIIconButton name="plus" variant="primary" to="/notes/new"/>
+				<UIIconButton name="plus" variant="primary" to="/notes/new" />
 			</div>
 			<div class="todo__list">
-
 				<UICard
 					v-for="note in notesStore.notes"
 					:key="note.id"
@@ -27,7 +25,7 @@
 							<h2 class="todo-card__title text-heading-m">
 								{{ note.title }}
 							</h2>
-							<UIIconButton name="edit" :to="`/notes/${note.id}`"/>
+							<UIIconButton name="edit" :to="`/notes/${note.id}`" />
 						</div>
 					</template>
 
@@ -37,11 +35,12 @@
 								v-for="task in note.tasks"
 								:key="task.id"
 								:class="[
-								'todo-card__item',
-								'text-body-m',
-								{ 'todo-card__item--done': task.done}
-							]"
-								class="">
+									'todo-card__item',
+									'text-body-m',
+									{ 'todo-card__item--done': task.done },
+								]"
+								class=""
+							>
 								{{ task.label }}
 							</li>
 						</ul>
@@ -57,11 +56,9 @@
 						</UIButton>
 					</template>
 				</UICard>
-
 			</div>
 		</div>
 	</section>
-
 </template>
 
 <style scoped lang="scss">

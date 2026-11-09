@@ -1,6 +1,13 @@
 <script setup lang="ts">
-	import { UIInput, UICheckbox, UIButton, UIIconButton, UICard } from '@note-todo/ui'
-	import { useNoteEditor } from "~/composables/useNoteEditor.ts";
+	import {
+		UIInput,
+		UICheckbox,
+		UIButton,
+		UIIconButton,
+		UICard,
+	} from '@note-todo/ui'
+
+	import { useNoteEditor } from '~/composables/useNoteEditor.ts'
 
 	const route = useRoute()
 	const noteId = computed(() => String(route.params.id))
@@ -14,12 +21,12 @@
 		removeTask,
 		saveNote,
 		removeNote,
-		cancelEditNote
-	} =useNoteEditor(noteId)
+		cancelEditNote,
+	} = useNoteEditor(noteId)
 
-	const title = computed(() => isNew.value ? 'Создать новую задачу' : 'Редактировать задачу')
-
-
+	const title = computed(() =>
+		isNew.value ? 'Создать новую задачу' : 'Редактировать задачу'
+	)
 </script>
 
 <template>
@@ -30,8 +37,8 @@
 			</h1>
 
 			<form
-				@submit.prevent="saveNote()"
 				class="note-editor__form note-editor-form"
+				@submit.prevent="saveNote()"
 			>
 				<UICard>
 					<template #header>
@@ -46,7 +53,9 @@
 						</UIInput>
 					</template>
 					<div role="group" aria-labelledby="task-title">
-						<h2 id="task-title" class="note-editor-form__title text-heading-m">Задачи</h2>
+						<h2 id="task-title" class="note-editor-form__title text-heading-m">
+							Задачи
+						</h2>
 						<ul class="note-editor-form__tasks">
 							<li
 								v-for="(task, index) in draft.tasks"
@@ -83,44 +92,27 @@
 					</div>
 					<template #footer>
 						<div class="note-editor-form__actions">
-							<UIButton type="submit" >Сохранить</UIButton>
-							<UIButton
-								variant="secondary"
-								@click="cancelEditNote"
-							>
+							<UIButton type="submit">Сохранить</UIButton>
+							<UIButton variant="secondary" @click="cancelEditNote">
 								Отменить
 							</UIButton>
-							<UIButton
-								v-if="!isNew"
-								variant="secondary"
-								@click="removeNote"
-							>
+							<UIButton v-if="!isNew" variant="secondary" @click="removeNote">
 								Удалить
 							</UIButton>
 						</div>
 					</template>
 				</UICard>
-
 			</form>
 		</div>
 		<div v-else class="note-editor__empty">
-			<UICard
-				class="note-editor__empty-card empty-card"
-			>
+			<UICard class="note-editor__empty-card empty-card">
 				<template #card>
 					<span>Такой заметки не существует</span>
-					<UIButton
-						to="/"
-						class="empty-card__button"
-					>
-						На главную
-					</UIButton>
+					<UIButton to="/" class="empty-card__button"> На главную </UIButton>
 				</template>
 			</UICard>
 		</div>
 	</section>
-
-
 </template>
 
 <style scoped lang="scss">

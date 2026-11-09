@@ -15,7 +15,6 @@
 		to = '',
 		href = '',
 		underline = false,
-
 	} = defineProps<InlineButtonProps>()
 
 	const slots = defineSlots<ButtonSlots>()

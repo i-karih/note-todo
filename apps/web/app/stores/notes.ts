@@ -1,4 +1,6 @@
-import type { Note } from '~/types';
+import type { Note } from '~/types'
+
+import { cloneNote } from '~/utils'
 
 export const useNotesStore = defineStore('notes', () => {
 	const notes = ref<Note[]>([
@@ -9,27 +11,27 @@ export const useNotesStore = defineStore('notes', () => {
 				{
 					id: '1',
 					done: false,
-					label: 'Купить яблоки'
+					label: 'Купить яблоки',
 				},
 				{
 					id: '2',
 					done: true,
-					label: 'Купить молоко'
-				}
-			]
-		}
-	]);
+					label: 'Купить молоко',
+				},
+			],
+		},
+	])
 
 	const getNoteById = (id: string) => {
 		return notes.value.find((note) => note.id === id)
-	};
+	}
 
 	const removeNoteById = (id: string) => {
 		notes.value = notes.value.filter((note) => note.id !== id)
 	}
 
 	const saveNote = (note: Note) => {
-		const copy: Note = JSON.parse(JSON.stringify(note))
+		const copy = cloneNote(note)
 		const index = notes.value.findIndex(({ id }) => id === note.id)
 
 		if (index === -1) {
@@ -39,9 +41,5 @@ export const useNotesStore = defineStore('notes', () => {
 		}
 	}
 
-	return { notes,
-		getNoteById,
-		saveNote,
-		removeNoteById
-	}
+	return { notes, getNoteById, saveNote, removeNoteById }
 })

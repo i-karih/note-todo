@@ -1,6 +1,6 @@
-import type { Component } from 'vue'
 import type { IconName, IconSize } from '../Icon/Icon.types'
 import type { ButtonVariant } from './Buttons.types'
+import type { Component } from 'vue'
 
 export type IconButtonProps = {
 	name: IconName
