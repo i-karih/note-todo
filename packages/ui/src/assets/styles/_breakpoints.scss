@@ -1,0 +1,17 @@
+// ===========================================
+// Container Sizes
+// ===========================================
+
+// SCSS переменные
+$container-sm: 640px; // формы: авторизация, регистрация
+$container-md: 960px; // узкие страницы: настройки, профиль
+$container-lg: 1280px; // основной кабинет
+$container-max: 1440px; // максимальная ширина
+
+// CSS переменные
+:root {
+	--container-sm: #{$container-sm};
+	--container-md: #{$container-md};
+	--container-lg: #{$container-lg};
+	--container-max: #{$container-max};
+}

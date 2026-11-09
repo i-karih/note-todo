@@ -1,0 +1,105 @@
+// Semantic Color Tokens — Dark Theme
+
+:root {
+	// Текст
+	--text-primary: var(--gray-50);
+	--text-secondary: var(--gray-200);
+	--text-muted: var(--gray-400);
+	--text-subtle: var(--neutral-450);
+	--text-placeholder: var(--neutral-500);
+	--text-disabled: var(--neutral-400);
+	--text-on-primary: var(--white);
+	--text-on-primary-subtle: var(--violet-50);
+	--text-link: var(--violet-400);
+	--text-success: var(--green-500);
+	--text-warning: var(--amber-500);
+	--text-danger: var(--red-500);
+	--text-hint: var(--gray-400);
+	--text-inline-button-primary: var(--violet-400);
+	--text-inline-button-primary-hover: var(--violet-300);
+	--text-inline-button-primary-pressed: var(--violet-500);
+	--text-inline-button-secondary: var(--gray-400);
+	--text-inline-button-secondary-hover: var(--gray-50);
+	--text-inline-button-secondary-pressed: var(--gray-200);
+
+	// Фоны
+	--bg-base: var(--neutral-900);
+	--bg-surface: var(--neutral-850);
+	--bg-inset: var(--neutral-900);
+	--bg-hover: var(--neutral-800);
+	--bg-active: var(--neutral-700);
+	--bg-pressed: var(--neutral-700);
+	--bg-track: var(--neutral-700);
+	--bg-muted: var(--neutral-750);
+	--bg-primary: var(--violet-500);
+	--bg-primary-hover: var(--violet-600);
+	--bg-primary-active: var(--violet-700);
+	--bg-primary-subtle: var(--violet-900);
+	--bg-success-subtle: var(--green-900);
+	--bg-warning-subtle: var(--amber-900);
+	--bg-danger-subtle: var(--red-900);
+	--bg-primary-subtle-hover: var(--violet-800);
+	--bg-primary-subtle-active: var(--violet-950);
+	--bg-canvas: var(--neutral-950);
+	--bg-on-primary: var(--white);
+	--bg-modal-overlay: var(--black-60);
+	--bg-hover-overlay: var(--white-8);
+
+	// Обводки
+	--border-default: var(--neutral-700);
+	--border-strong: var(--neutral-600);
+	--border-subtle: var(--neutral-750);
+	--border-focus: var(--violet-500);
+	--border-accent: var(--violet-900);
+	--border-danger: var(--red-500);
+	--border-success: var(--green-500);
+	--border-warning: var(--amber-500);
+	--primary-border-focus: var(--violet-50);
+
+	// Иконки и элементы
+	--icon-brand: var(--violet-400);
+	--icon-primary: var(--violet-500);
+	--icon-success: var(--green-500);
+	--icon-disabled: var(--neutral-550);
+	--track-default: var(--neutral-700);
+
+	// Дисциплины
+	--discipline-vocal: var(--violet-500);
+	--discipline-guitar: var(--emerald-500);
+	--discipline-guitar-text: var(--emerald-400);
+	--discipline-guitar-border: var(--emerald-800);
+	--discipline-guitar-subtle: var(--emerald-950);
+	--discipline-guitar-on-subtle: var(--emerald-300);
+
+	// Аватары
+	--avatar-student-from: var(--violet-500);
+	--avatar-student-to: var(--violet-700);
+	--avatar-teacher-vocal: var(--teal-600);
+	--avatar-teacher-guitar: var(--emerald-600);
+
+	// Эффекты
+	--effect-glow-top: var(--violet-600-22);
+	--effect-glow-bottom: var(--teal-600-12);
+	--effect-shadow: var(--black-40);
+
+	// Статусы (для Alert, Toast, Badge и т.д.)
+	--status-default-bg: var(--bg-surface);
+	--status-default-border: var(--border-default);
+	--status-default-icon: var(--text-muted);
+
+	--status-success-bg: var(--bg-success-subtle);
+	--status-success-border: var(--border-success);
+	--status-success-icon: var(--text-success);
+
+	--status-info-bg: var(--bg-primary-subtle);
+	--status-info-border: var(--border-focus);
+	--status-info-icon: var(--text-link);
+
+	--status-warning-bg: var(--bg-warning-subtle);
+	--status-warning-border: var(--border-warning);
+	--status-warning-icon: var(--text-warning);
+
+	--status-danger-bg: var(--bg-danger-subtle);
+	--status-danger-border: var(--border-danger);
+	--status-danger-icon: var(--text-danger);
+}

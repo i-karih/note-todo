@@ -1,0 +1,67 @@
+// Брейкпоинты (SCSS для media queries)
+$breakpoint-sm: 600px;
+$breakpoint-md: 900px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1920px;
+
+// Media queries
+@mixin sm {
+	@media (min-width: $breakpoint-sm) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media (min-width: $breakpoint-md) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media (min-width: $breakpoint-lg) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media (min-width: $breakpoint-xl) {
+		@content;
+	}
+}
+
+// Контейнер с максимальной шириной
+@mixin container($max-width: var(--container-lg), $padding: 0) {
+	width: 100%;
+	max-width: $max-width;
+	margin: auto;
+	padding: $padding;
+}
+
+// Страницы
+@mixin page-padding($top: 4, $bottom: 4) {
+	padding-top: calc(#{$top} * 0.25rem);
+	padding-bottom: calc(#{$bottom} * 0.25rem);
+}
+
+// Скрытый элемент для screen readers
+@mixin visually-hidden {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	pointer-events: none;
+}
+
+// Контейнер с направлением (vertical/horizontal)
+@mixin direction-container($gap: var(--spacing-150)) {
+	display: flex;
+	gap: $gap;
+
+	&--vertical {
+		flex-direction: column;
+	}
+
+	&--horizontal {
+		flex-wrap: wrap;
+	}
+}

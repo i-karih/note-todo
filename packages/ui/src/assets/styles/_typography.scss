@@ -1,0 +1,173 @@
+// ===========================================
+// Typography Tokens
+// ===========================================
+
+:root {
+	// Font Weights
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+
+	// Display
+	--typography-display-size: 28px;
+	--typography-display-line-height: 120%;
+	--typography-display-weight: 600;
+	--typography-display-letter-spacing: -0.4px;
+
+	// Heading L
+	--typography-heading-l-size: 24px;
+	--typography-heading-l-line-height: 125%;
+	--typography-heading-l-weight: 600;
+	--typography-heading-l-letter-spacing: -0.3px;
+
+	// Heading M
+	--typography-heading-m-size: 18px;
+	--typography-heading-m-line-height: 130%;
+	--typography-heading-m-weight: 600;
+	--typography-heading-m-letter-spacing: 0;
+
+	// Button
+	--typography-button-l-size: 16px;
+	--typography-button-m-size: 14px;
+	--typography-button-s-size: 12px;
+
+	--typography-button-line-height: 100%;
+	--typography-inline-button-line-height: 120%;
+
+	--typography-button-weight: 600;
+	--typography-button-l-weight: 600;
+	--typography-button-l-letter-spacing: 0;
+
+	// Body L
+	--typography-body-l-size: 16px;
+	--typography-body-l-line-height: 120%;
+	--typography-body-l-weight: 400;
+	--typography-body-l-letter-spacing: 0;
+
+	// Body M
+	--typography-body-m-size: 14px;
+	--typography-body-m-line-height: 120%;
+	--typography-body-m-weight: 400;
+	--typography-body-m-letter-spacing: 0;
+
+	// Body S
+	--typography-body-s-size: 12px;
+	--typography-body-s-line-height: 120%;
+	--typography-body-s-weight: 400;
+	--typography-body-s-letter-spacing: 0;
+
+	// Label
+	--typography-label-size: 12px;
+	--typography-label-line-height: 130%;
+	--typography-label-weight: 600;
+	--typography-label-letter-spacing: 0;
+
+	// Caption
+	--typography-caption-size: 11px;
+	--typography-caption-line-height: 130%;
+	--typography-caption-weight: 600;
+	--typography-caption-letter-spacing: 0.6px;
+
+	// Logo
+	--typography-logo-s-size: 16px;
+	--typography-logo-m-size: 20px;
+	--typography-logo-l-size: 28px;
+	--typography-logo-weight: 600;
+}
+
+// ===========================================
+// Typography Classes
+// ===========================================
+
+.text-display {
+	font-size: var(--typography-display-size);
+	line-height: var(--typography-display-line-height);
+	font-weight: var(--typography-display-weight);
+	letter-spacing: var(--typography-display-letter-spacing);
+}
+
+.text-heading-l {
+	font-size: var(--typography-heading-l-size);
+	line-height: var(--typography-heading-l-line-height);
+	font-weight: var(--typography-heading-l-weight);
+	letter-spacing: var(--typography-heading-l-letter-spacing);
+}
+
+.text-heading-m {
+	font-size: var(--typography-heading-m-size);
+	line-height: var(--typography-heading-m-line-height);
+	font-weight: var(--typography-heading-m-weight);
+	letter-spacing: var(--typography-heading-m-letter-spacing);
+}
+
+.text-body-l {
+	font-size: var(--typography-body-l-size);
+	line-height: var(--typography-body-l-line-height);
+	font-weight: var(--typography-body-l-weight);
+	letter-spacing: var(--typography-body-l-letter-spacing);
+}
+
+.text-body-m {
+	font-size: var(--typography-body-m-size);
+	line-height: var(--typography-body-m-line-height);
+	font-weight: var(--typography-body-m-weight);
+	letter-spacing: var(--typography-body-m-letter-spacing);
+}
+
+.text-body-s {
+	font-size: var(--typography-body-s-size);
+	line-height: var(--typography-body-s-line-height);
+	font-weight: var(--typography-body-s-weight);
+	letter-spacing: var(--typography-body-s-letter-spacing);
+}
+
+.text-button-l {
+	font-size: var(--typography-button-l-size);
+	line-height: var(--typography-inline-button-line-height);
+	font-weight: var(--typography-button-weight);
+	letter-spacing: var(--typography-button-l-letter-spacing);
+}
+
+.text-button-m {
+	font-size: var(--typography-button-m-size);
+	line-height: var(--typography-inline-button-line-height);
+	font-weight: var(--typography-button-weight);
+	letter-spacing: var(--typography-button-l-letter-spacing);
+}
+
+.text-button-s {
+	font-size: var(--typography-button-s-size);
+	line-height: var(--typography-inline-button-line-height);
+	font-weight: var(--typography-button-weight);
+	letter-spacing: var(--typography-button-l-letter-spacing);
+}
+
+.text-label {
+	font-size: var(--typography-label-size);
+	line-height: var(--typography-label-line-height);
+	font-weight: var(--typography-label-weight);
+	letter-spacing: var(--typography-label-letter-spacing);
+}
+
+.text-caption {
+	font-size: var(--typography-caption-size);
+	line-height: var(--typography-caption-line-height);
+	font-weight: var(--typography-caption-weight);
+	letter-spacing: var(--typography-caption-letter-spacing);
+}
+
+// ===========================================
+// Font Weight Utilities
+// ===========================================
+
+.font-regular {
+	font-weight: var(--font-weight-regular);
+}
+
+.font-medium {
+	font-weight: var(--font-weight-medium);
+}
+
+.font-semibold {
+	font-weight: var(--font-weight-semibold);
+}

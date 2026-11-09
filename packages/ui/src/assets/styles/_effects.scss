@@ -1,0 +1,18 @@
+// ===========================================
+// Effects
+// ===========================================
+
+:root {
+	--glow-purple: radial-gradient(
+		ellipse,
+		oklch(0.55 0.22 293 / 0.22),
+		transparent 68%
+	);
+	--glow-cyan: radial-gradient(
+		ellipse,
+		oklch(0.5 0.16 200 / 0.12),
+		transparent 70%
+	);
+	--ring-focus: rgba(155, 96, 255, 0.35);
+	--ring-danger: rgba(252, 88, 85, 0.35);
+}
