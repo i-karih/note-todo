@@ -59,7 +59,7 @@
 
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-300);
+		gap: var(--spacing-200);
 		background-color: var(--card-bg-color, var(--bg-surface));
 		border: var(--border-1) solid var(--card-border, var(--border-default));
 		border-radius: var(--corner-16);
@@ -73,6 +73,7 @@
 			flex-direction: column;
 
 			max-height: 100%;
+			height: 100%;
 		}
 
 		&--interactive {
