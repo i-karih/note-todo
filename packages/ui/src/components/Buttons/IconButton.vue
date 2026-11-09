@@ -1,28 +1,71 @@
 <script setup lang="ts">
-	import Icon from '../Icon/Icon.vue'
-	import  type { IconName, IconSize } from '../Icon/Icon.types'
-	import InlineButton from './InlineButton.vue'
+	import type { IconButtonProps } from './IconButton.types'
 
-	const { size = 'small', name } = defineProps<{ size?: IconSize, name: IconName }>()
+	import { UIIcon } from '../Icon'
+	import InlineButton from './InlineButton.vue'
+	import Primitive from "./Primitive.vue";
+
+	const {
+		name,
+		size = 'small',
+		to = '',
+		href = '',
+		as,
+		type,
+		variant = 'secondary',
+		disabled = false,
+	} = defineProps<IconButtonProps>()
 </script>
 
 <template>
-	<InlineButton class="ui-button-close" variant="secondary">
-		<Icon :size="size" :name="name" />
-	</InlineButton>
+	<Primitive
+		:class="[
+			'ui-icon-button',
+			`ui-icon-button--${variant}`,
+		]"
+		:variant="variant"
+		:to="to"
+		:href="href"
+		:as="as"
+		:type="type"
+		:disabled="disabled"
+	>
+		<UIIcon :size="size" :name="name" />
+	</Primitive>
 </template>
 
 <style scoped lang="scss">
-	.ui-button-close {
+	.ui-icon-button {
 		padding: var(--spacing-100);
 		border-radius: var(--corner-8);
+		color: var(--text-primary);
 		transition:
 			background-color 0.3s,
 			color 0.3s;
-		&:hover {
-			@media (hover: hover) {
-				background-color: var(--bg-hover-overlay);
+
+		&--primary {
+			background-color: var(--bg-primary);
+			&:hover {
+				@media (hover: hover) {
+					background-color: var(--bg-primary-hover);
+				}
+			}
+			&:active {
+				background-color: var(--bg-primary-active);
 			}
 		}
+
+		&--secondary {
+			&:hover {
+				@media (hover: hover) {
+					background-color: var(--bg-hover-overlay);
+				}
+			}
+
+			&:active {
+				background-color: var(--bg-active);
+			}
+		}
+
 	}
 </style>
