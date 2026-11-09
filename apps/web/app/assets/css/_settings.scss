@@ -3,3 +3,19 @@ body {
 	background-color: var(--bg-base);
 	color: var(--text-primary);
 }
+
+section {
+	padding: var(--spacing-800) 0;
+}
+
+.container {
+	max-width: calc(var(--container-max-width) + var(--spacing-200) * 2) ;
+	margin: 0 auto;
+	padding: 0 var(--spacing-200);
+}
+
+.container-sm {
+	max-width: calc(var(--container-sm-max-width) + var(--spacing-200) * 2);
+	margin: 0 auto;
+	padding: 0 var(--spacing-200);
+}
