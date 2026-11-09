@@ -38,6 +38,11 @@
 			--spinner-border: 3px;
 		}
 
+		&--auto {
+			--spinner-size: 1em;
+			--spinner-border: 0.15em;
+		}
+
 		&__circle {
 			width: var(--spinner-size);
 			height: var(--spinner-size);
