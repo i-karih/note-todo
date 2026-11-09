@@ -5,6 +5,7 @@
 
 	const {
 		as,
+		type,
 		size = 'large',
 		variant = 'primary',
 		// TODO(i18n)
@@ -21,6 +22,7 @@
 <template>
 	<Primitive
 		:as="as"
+		:type="type"
 		:class="[`ui-button--${variant}`, `ui-button--${size}`]"
 		:disabled="disabled"
 		:loading="loading"

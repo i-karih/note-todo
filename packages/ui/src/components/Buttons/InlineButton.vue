@@ -5,6 +5,7 @@
 
 	const {
 		as,
+		type,
 		size = 'large',
 		variant = 'primary',
 		// TODO(i18n)
@@ -14,6 +15,7 @@
 		to = '',
 		href = '',
 		underline = false,
+
 	} = defineProps<InlineButtonProps>()
 
 	const slots = defineSlots<ButtonSlots>()
@@ -22,6 +24,7 @@
 <template>
 	<Primitive
 		:as="as"
+		:type="type"
 		class="ui-inline-button"
 		:class="[
 			`ui-inline-button--${variant}`,

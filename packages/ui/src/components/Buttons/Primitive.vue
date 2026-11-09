@@ -15,6 +15,7 @@
 		loadingText,
 		to = '',
 		href = '',
+		type = 'button',
 	} = defineProps<PrimitiveProps>()
 
 	const slots = defineSlots<ButtonSlots>()
@@ -39,7 +40,10 @@
 				target: '_blank',
 				rel: 'noopener noreferrer',
 			}
-		return { disabled: disabled || loading || undefined }
+		return {
+			type,
+			disabled: disabled || loading || undefined
+		}
 	})
 </script>
 

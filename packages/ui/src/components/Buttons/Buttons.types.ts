@@ -15,6 +15,7 @@ export type ButtonProps = {
 	loadingText?: string
 	loading?: boolean
 	disabled?: boolean
+	type?: 'button' | 'submit' | 'reset'
 }
 
 export type InlineButtonProps = ButtonProps & {
