@@ -7,7 +7,8 @@
 	"types": "src/index.ts",
 	"exports": {
 		".": "./src/index.ts",
-		"./styles": "./src/styles/main.scss"
+		"./styles": "./src/assets/styles/main.scss",
+		"./mixins": "./src/assets/styles/_mixins.scss"
 	},
 	"peerDependencies": {
 		"vue": "^3.5.0"

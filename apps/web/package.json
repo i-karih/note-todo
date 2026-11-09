@@ -10,6 +10,7 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
+		"@fontsource/golos-ui": "^4.5.3",
 		"@note-todo/ui": "workspace:*",
 		"@pinia/nuxt": "^1.0.3",
 		"nuxt": "^4.6.4",

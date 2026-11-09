@@ -8,5 +8,22 @@ export default defineNuxtConfig({
 
   typescript: {
     strict: true
-  }
+  },
+
+  css: [
+    '@fontsource/golos-ui/400.css',
+    '@fontsource/golos-ui/600.css',
+    '@note-todo/ui/styles',
+    '~/assets/css/main.scss',
+  ],
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@note-todo/ui/mixins" as *;`,
+        },
+      },
+    },
+  },
 })
