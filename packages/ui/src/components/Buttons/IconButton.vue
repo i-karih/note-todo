@@ -1,15 +1,14 @@
 <script setup lang="ts">
-	import type { ButtonSize } from './Buttons.types'
-
-	import Icon from '../Icons/Icon.vue'
+	import Icon from '../Icon/Icon.vue'
+	import  type { IconName, IconSize } from '../Icon/Icon.types'
 	import InlineButton from './InlineButton.vue'
 
-	const { size = 'small' } = defineProps<{ size?: ButtonSize }>()
+	const { size = 'small', name } = defineProps<{ size?: IconSize, name: IconName }>()
 </script>
 
 <template>
 	<InlineButton class="ui-button-close" variant="secondary">
-		<Icon :size="size" name="X" />
+		<Icon :size="size" :name="name" />
 	</InlineButton>
 </template>
 

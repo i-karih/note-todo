@@ -3,7 +3,7 @@
 	import { onBeforeUnmount, useId, useTemplateRef, watch } from 'vue'
 
 	import { useFocusTrap } from '../../composables'
-	import CloseButton from '../Buttons/CloseButton.vue'
+	import IconButton from '../Buttons/IconButton.vue'
 	import ModalBody from './ModalBody.vue'
 	import ModalContent from './ModalContent.vue'
 	import ModalFooter from './ModalFooter.vue'
@@ -69,7 +69,8 @@
 						role="dialog"
 						class="ui-modal__body"
 					>
-						<CloseButton
+						<IconButton
+							name="close"
 							aria-label="Закрыть модальное окно"
 							class="ui-modal__close"
 							@click="closeModal"
