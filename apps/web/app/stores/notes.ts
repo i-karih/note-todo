@@ -3,24 +3,9 @@ import type { Note } from '~/types'
 import { cloneNote } from '~/utils'
 
 export const useNotesStore = defineStore('notes', () => {
-	const notes = ref<Note[]>([
-		{
-			id: '1',
-			title: 'тестовая заметка',
-			tasks: [
-				{
-					id: '1',
-					done: false,
-					label: 'Купить яблоки',
-				},
-				{
-					id: '2',
-					done: true,
-					label: 'Купить молоко',
-				},
-			],
-		},
-	])
+	const notes = ref<Note[]>([])
+
+	const isEmptyNotes = computed(() => !!notes.value.length)
 
 	const getNoteById = (id: string) => {
 		return notes.value.find((note) => note.id === id)
@@ -41,5 +26,11 @@ export const useNotesStore = defineStore('notes', () => {
 		}
 	}
 
-	return { notes, getNoteById, saveNote, removeNoteById }
+	return {
+		notes,
+		isEmptyNotes,
+		getNoteById,
+		saveNote,
+		removeNoteById
+	}
 })

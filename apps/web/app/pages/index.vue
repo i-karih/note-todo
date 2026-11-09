@@ -13,7 +13,7 @@
 				<h1 class="todo__title text-display">Мои заметки</h1>
 				<UIIconButton name="plus" variant="primary" to="/notes/new" />
 			</div>
-			<div class="todo__list">
+			<div v-if="notesStore.isEmptyNotes" class="todo__list">
 				<UICard
 					v-for="note in notesStore.notes"
 					:key="note.id"
@@ -57,6 +57,15 @@
 					</template>
 				</UICard>
 			</div>
+			<div v-else class="todo__empty">
+				<UICard
+					class="todo__empty-card"
+				>
+					<template #card>
+						Заметок еще нет, их можно добавить нажав на кнопку добавить
+					</template>
+				</UICard>
+			</div>
 		</div>
 	</section>
 </template>
@@ -81,6 +90,14 @@
 		&__card {
 			width: 100%;
 			max-width: 300px;
+		}
+
+		&__empty {
+			&-card {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 		}
 	}
 
