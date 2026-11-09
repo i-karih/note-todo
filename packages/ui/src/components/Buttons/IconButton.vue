@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import type { IconButtonProps } from './IconButton.types'
 
-	import { Icon } from '../Icon/Icon.vue'
+	import Icon from '../Icon/Icon.vue'
 	import Primitive from './Primitive.vue'
 
 	const {
@@ -32,6 +32,7 @@
 
 <style scoped lang="scss">
 	.ui-icon-button {
+		$self: &;
 		padding: var(--spacing-100);
 		border-radius: var(--corner-8);
 		color: var(--text-primary);
@@ -49,6 +50,11 @@
 			&:active {
 				background-color: var(--bg-primary-active);
 			}
+
+			&:focus-visible:not(#{$self}--disabled) {
+				outline: var(--border-2) solid var(--primary-border-focus);
+				outline-offset: var(--spacing-25);
+			}
 		}
 
 		&--secondary {
@@ -60,6 +66,11 @@
 
 			&:active {
 				background-color: var(--bg-active);
+			}
+
+			&:focus-visible:not(#{$self}--disabled) {
+				outline: var(--border-2) solid var(--border-focus);
+				outline-offset: var(--spacing-25);
 			}
 		}
 	}
