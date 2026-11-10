@@ -1,9 +1,20 @@
 <script setup lang="ts">
 	import { UICard, UIIconButton, UIButton } from '@note-todo/ui'
 
+	import { useConfirm } from '~/composables'
 	import { useNotesStore } from '~/stores/notes.ts'
 
+	const confirm = useConfirm()
 	const notesStore = useNotesStore()
+
+	const removeNote = (id: string) => {
+		confirm({
+			title: 'Удалить заметку?',
+			content: 'Это действие нельзя отменить.',
+			confirmText: 'Удалить',
+			onConfirm: () => notesStore.removeNoteById(id),
+		})
+	}
 </script>
 
 <template>
@@ -50,7 +61,7 @@
 						<UIButton
 							variant="secondary"
 							class="todo-card__delete"
-							@click="notesStore.removeNoteById(note.id)"
+							@click="removeNote(note.id)"
 						>
 							Удалить
 						</UIButton>
@@ -58,9 +69,7 @@
 				</UICard>
 			</div>
 			<div v-else class="todo__empty">
-				<UICard
-					class="todo__empty-card"
-				>
+				<UICard class="todo__empty-card">
 					<template #card>
 						Заметок еще нет, их можно добавить нажав на кнопку добавить
 					</template>

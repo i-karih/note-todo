@@ -7,10 +7,12 @@
 		UICard,
 	} from '@note-todo/ui'
 
-	import { useNoteEditor } from '~/composables/useNoteEditor.ts'
+	import { useNoteEditor, useConfirm } from '~/composables'
 
 	const route = useRoute()
 	const noteId = computed(() => String(route.params.id))
+
+	const confirm = useConfirm()
 
 	const {
 		isNew,
@@ -23,6 +25,25 @@
 		removeNote,
 		cancelEditNote,
 	} = useNoteEditor(noteId)
+
+	const handleRemoveNote = () => {
+		confirm({
+			title: 'Удалить заметку?',
+			content: 'Это действие нельзя отменить.',
+			confirmText: 'Удалить',
+			onConfirm: removeNote,
+		})
+	}
+
+	const handleCancelEditNote = () => {
+		confirm({
+			title: 'Отменить редактирование?',
+			content: 'Несохраненные изменения пропадут.',
+			confirmText: 'Отменить изменения',
+			cancelText: 'Продолжить редактирование',
+			onConfirm: cancelEditNote,
+		})
+	}
 
 	const title = computed(() =>
 		isNew.value ? 'Создать новую заметку' : 'Редактировать заметку'
@@ -93,10 +114,14 @@
 					<template #footer>
 						<div class="note-editor-form__actions">
 							<UIButton type="submit">Сохранить</UIButton>
-							<UIButton variant="secondary" @click="cancelEditNote">
+							<UIButton variant="secondary" @click="handleCancelEditNote">
 								Отменить
 							</UIButton>
-							<UIButton v-if="!isNew" variant="secondary" @click="removeNote">
+							<UIButton
+								v-if="!isNew"
+								variant="secondary"
+								@click="handleRemoveNote"
+							>
 								Удалить
 							</UIButton>
 						</div>
