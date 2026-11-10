@@ -46,10 +46,23 @@
 		@update:model-value="onModalUpdate"
 	>
 		<template #footer>
-			<Button variant="secondary" autofocus @click="cancel">{{
-				cancelText
-			}}</Button>
-			<Button @click="confirm"> {{ confirmText }} </Button>
+			<Button
+				class="ui-modal-confirm-button"
+				variant="secondary"
+				autofocus
+				@click="cancel"
+			>
+				{{ cancelText }}
+			</Button>
+			<Button class="ui-modal-confirm-button" @click="confirm">
+				{{ confirmText }}
+			</Button>
 		</template>
 	</Modal>
 </template>
+
+<style scoped lang="scss">
+	.ui-modal-confirm-button {
+		flex: 1 1 auto;
+	}
+</style>
