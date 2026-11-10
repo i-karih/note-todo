@@ -5,7 +5,7 @@ import { cloneNote } from '~/utils'
 export const useNotesStore = defineStore('notes', () => {
 	const notes = ref<Note[]>([])
 
-	const isEmptyNotes = computed(() => !!notes.value.length)
+	const hasNotes = computed(() => notes.value.length > 0)
 
 	const getNoteById = (id: string) => {
 		return notes.value.find((note) => note.id === id)
@@ -28,9 +28,9 @@ export const useNotesStore = defineStore('notes', () => {
 
 	return {
 		notes,
-		isEmptyNotes,
+		hasNotes,
 		getNoteById,
 		saveNote,
-		removeNoteById
+		removeNoteById,
 	}
 })

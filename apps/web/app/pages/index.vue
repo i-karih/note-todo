@@ -24,7 +24,7 @@
 				<h1 class="todo__title text-display">Мои заметки</h1>
 				<UIIconButton name="plus" variant="primary" to="/notes/new" />
 			</div>
-			<div v-if="notesStore.isEmptyNotes" class="todo__list">
+			<div v-if="notesStore.hasNotes" class="todo__list">
 				<UICard
 					v-for="note in notesStore.notes"
 					:key="note.id"
@@ -50,7 +50,6 @@
 									'text-body-m',
 									{ 'todo-card__item--done': task.done },
 								]"
-								class=""
 							>
 								{{ task.label }}
 							</li>
