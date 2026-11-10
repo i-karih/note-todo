@@ -25,7 +25,7 @@
 	} = useNoteEditor(noteId)
 
 	const title = computed(() =>
-		isNew.value ? 'Создать новую задачу' : 'Редактировать задачу'
+		isNew.value ? 'Создать новую заметку' : 'Редактировать заметку'
 	)
 </script>
 
