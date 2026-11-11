@@ -9,3 +9,11 @@ export type Note = {
 	title: string
 	tasks: Task[]
 }
+
+export type NoteInputValues = {
+	id?: string
+	oldValue: string
+	newValue: string
+}
+
+export type TextCommitCallback = (values: NoteInputValues) => void
