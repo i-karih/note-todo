@@ -1,12 +1,9 @@
-import type { Note } from '~/types'
+import type { Note, NoteInputValues, Task } from '~/types'
 import type { MaybeRefOrGetter } from 'vue'
 
+import { NoteCommandType } from '~/constants'
 import { useNotesStore } from '~/stores/notes.ts'
 import { cloneNote, createEmptyNote, createEmptyTask } from '~/utils'
-
-const cancelEditNote = () => {
-	navigateTo('/')
-}
 
 export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 	const notesStore = useNotesStore()
@@ -21,30 +18,33 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 		note.value ? cloneNote(note.value) : createEmptyNote()
 	)
 
-	const addNewTaskForNote = () => {
-		draft.value.tasks.push(createEmptyTask())
-	}
+	const { recordCommand, undo, redo, clearHistory } = useNoteHistory(draft)
 
 	const isNotFound = computed(() => !isNew.value && !note.value)
 
-	const emptyNoteTitle = computed(() => !draft.value.title.trim())
+	const isTitleEmpty = computed(() => !draft.value.title.trim())
 
-	const errorNoteTitle = ref('')
+	const titleError = ref('')
 
-	const removeTask = (id: string) => {
-		draft.value.tasks = draft.value.tasks.filter((task) => task.id !== id)
+	const cancelEditNote = () => {
+		clearHistory()
+
+		navigateTo('/')
 	}
 
 	const saveNote = () => {
-		if (emptyNoteTitle.value) {
-			errorNoteTitle.value = 'Поле обязательно для заполнения'
+		if (isTitleEmpty.value) {
+			titleError.value = 'Поле обязательно для заполнения'
 		} else {
-			errorNoteTitle.value = ''
+			titleError.value = ''
 
 			notesStore.saveNote({
 				...draft.value,
 				tasks: draft.value.tasks.filter((task) => task.label.trim()),
 			})
+
+			clearHistory()
+
 			navigateTo('/')
 		}
 	}
@@ -54,15 +54,72 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 		notesStore.removeNoteById(draft.value.id)
 	}
 
+	const removeTask = (id: string) => {
+		const taskIndex = draft.value.tasks.findIndex((task) => task.id === id)
+		const task = draft.value.tasks[taskIndex]
+
+		if (!task) return
+
+		recordCommand({
+			type: NoteCommandType.RemoveTask,
+			task: { ...task },
+			index: taskIndex,
+		})
+
+		draft.value.tasks.splice(taskIndex, 1)
+	}
+
+	const addTask = () => {
+		const task = createEmptyTask()
+		draft.value.tasks.push(task)
+
+		recordCommand({
+			type: NoteCommandType.AddTask,
+			task: { ...task },
+			index: draft.value.tasks.length - 1,
+		})
+	}
+
+	const toggleTask = (taskId: Task['id']) => {
+		recordCommand({
+			type: NoteCommandType.ToggleTask,
+			taskId,
+		})
+	}
+
+	const setTitle = ({ oldValue, newValue }: NoteInputValues) => {
+		recordCommand({
+			type: NoteCommandType.SetTitle,
+			oldValue,
+			newValue,
+		})
+	}
+
+	const setTaskLabel = ({ id, oldValue, newValue }: NoteInputValues) => {
+		if (!id) return
+
+		recordCommand({
+			type: NoteCommandType.SetTaskLabel,
+			taskId: id,
+			oldValue,
+			newValue,
+		})
+	}
+
 	return {
 		isNew,
 		isNotFound,
 		draft,
-		errorNoteTitle,
-		addNewTaskForNote,
+		titleError,
+		setTitle,
+		setTaskLabel,
+		toggleTask,
+		addTask,
 		removeTask,
 		removeNote,
 		saveNote,
 		cancelEditNote,
+		undo,
+		redo,
 	}
 }

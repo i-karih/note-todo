@@ -7,7 +7,7 @@
 		UICard,
 	} from '@note-todo/ui'
 
-	import { useNoteEditor, useConfirm } from '~/composables'
+	import { useNoteEditor, useConfirm, useTextCommit } from '~/composables'
 
 	const route = useRoute()
 	const noteId = computed(() => String(route.params.id))
@@ -17,14 +17,19 @@
 	const {
 		isNew,
 		isNotFound,
-		errorNoteTitle,
+		titleError,
 		draft,
-		addNewTaskForNote,
+		addTask,
+		toggleTask,
+		setTitle,
+		setTaskLabel,
 		removeTask,
 		saveNote,
 		removeNote,
 		cancelEditNote,
 	} = useNoteEditor(noteId)
+
+	const { setStartText, commitTextOnBlur, commitTextOnPause } = useTextCommit()
 
 	const handleRemoveNote = () => {
 		confirm({
@@ -65,8 +70,11 @@
 					<template #header>
 						<UIInput
 							v-model="draft.title"
-							:status="errorNoteTitle ? 'danger' : 'default'"
-							:message="errorNoteTitle"
+							:status="titleError ? 'danger' : 'default'"
+							:message="titleError"
+							@focus="setStartText(draft.title)"
+							@input="commitTextOnPause(draft.title, setTitle)"
+							@blur="commitTextOnBlur(draft.title, setTitle)"
 						>
 							<template #label>
 								<span class="text-heading-m">Заголовок</span>
@@ -86,11 +94,15 @@
 								<UICheckbox
 									v-model="task.done"
 									:aria-label="`Пункт ${index + 1} ${task.done ? 'выполнен' : 'не выполнен'}`"
+									@update:model-value="toggleTask(task.id)"
 								/>
 								<UIInput
 									v-model="task.label"
 									class="note-editor-form__input"
 									:aria-label="`Текст пункта ${index + 1}`"
+									@focus="setStartText(task.label, task.id)"
+									@input="commitTextOnPause(task.label, setTaskLabel)"
+									@blur="commitTextOnBlur(task.label, setTaskLabel)"
 								/>
 								<UIIconButton
 									name="trash"
@@ -106,7 +118,7 @@
 						<UIButton
 							variant="secondary"
 							class="note-editor-form__add-button"
-							@click="addNewTaskForNote"
+							@click="addTask"
 						>
 							Добавить
 						</UIButton>

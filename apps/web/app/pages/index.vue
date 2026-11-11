@@ -7,7 +7,7 @@
 	const confirm = useConfirm()
 	const notesStore = useNotesStore()
 
-	const removeNote = (id: string) => {
+	const handleRemoveNote = (id: string) => {
 		confirm({
 			title: 'Удалить заметку?',
 			content: 'Это действие нельзя отменить.',
@@ -60,7 +60,7 @@
 						<UIButton
 							variant="secondary"
 							class="todo-card__delete"
-							@click="removeNote(note.id)"
+							@click="handleRemoveNote(note.id)"
 						>
 							Удалить
 						</UIButton>
