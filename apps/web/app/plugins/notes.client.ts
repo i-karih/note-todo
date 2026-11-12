@@ -4,5 +4,7 @@ export default defineNuxtPlugin(() => {
 	const notesStore = useNotesStore()
 	notesStore.getNotesFromStorage()
 
-	window.addEventListener('pagehide', notesStore.flushToStorage)
+	document.addEventListener('visibilitychange', () => {
+		if (document.visibilityState === 'hidden') notesStore.flushToStorage()
+	})
 })

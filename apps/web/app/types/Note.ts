@@ -21,4 +21,10 @@ export type NoteStorage = {
 	notes: Note[]
 }
 
+export type NoteDraftStorage = {
+	version: number
+	savedAt: number
+	note: Note
+}
+
 export type TextCommitCallback = (values: NoteInputValues) => void
