@@ -1,9 +1,16 @@
 import type { Note, NoteInputValues, Task } from '~/types'
 import type { MaybeRefOrGetter } from 'vue'
 
-import { NoteCommandType } from '~/constants'
+import { NOTES_SAVE_DELAY, NoteCommandType } from '~/constants'
 import { useNotesStore } from '~/stores/notes.ts'
-import { cloneNote, createEmptyNote, createEmptyTask } from '~/utils'
+import {
+	cloneNote,
+	createEmptyNote,
+	createEmptyTask,
+	saveDraft,
+	removeDraft,
+	debounce,
+} from '~/utils'
 
 export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 	const notesStore = useNotesStore()
@@ -26,8 +33,20 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 
 	const titleError = ref('')
 
+	const storedDraft = isNotFound.value ? null : loadDraft(toValue(noteId))
+
+	const hasStoreDraft = Boolean(storedDraft)
+
+	const restoreDraft = () => {
+		if (!storedDraft) return
+
+		draft.value = cloneNote(storedDraft)
+		clearHistory()
+	}
+
 	const cancelEditNote = () => {
 		clearHistory()
+		clearDraft()
 
 		navigateTo('/')
 	}
@@ -44,12 +63,14 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 			})
 
 			clearHistory()
+			clearDraft()
 
 			navigateTo('/')
 		}
 	}
 
 	const removeNote = async () => {
+		saveDraftDebounced.cancel()
 		await navigateTo('/', { replace: true })
 		notesStore.removeNoteById(draft.value.id)
 	}
@@ -106,10 +127,57 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 		})
 	}
 
+	const saveDraftDebounced = debounce(saveDraft, NOTES_SAVE_DELAY)
+
+	const clearDraft = () => {
+		saveDraftDebounced.cancel()
+		removeDraft(toValue(noteId))
+	}
+
+	const isDraftChanged = () => {
+		return note.value
+			? JSON.stringify(draft.value) !== JSON.stringify(note.value)
+			: Boolean(
+					draft.value.title.trim() ||
+					draft.value.tasks.some((task) => task.label.trim())
+				)
+	}
+
+	watch(
+		draft,
+		() => {
+			if (isDraftChanged()) {
+				saveDraftDebounced(toValue(noteId), draft.value)
+			} else {
+				clearDraft()
+			}
+		},
+		{ deep: true }
+	)
+
+	const flushDraft = () => {
+		saveDraftDebounced.cancel()
+		if (isDraftChanged()) saveDraft(toValue(noteId), draft.value)
+	}
+
+	const handleVisibilityChange = () => {
+		if (document.visibilityState === 'hidden') flushDraft()
+	}
+
+	onMounted(() => {
+		document.addEventListener('visibilitychange', handleVisibilityChange)
+	})
+
+	onBeforeUnmount(() => {
+		document.removeEventListener('visibilitychange', handleVisibilityChange)
+	})
+
 	return {
 		isNew,
 		isNotFound,
 		draft,
+		hasStoreDraft,
+		restoreDraft,
 		titleError,
 		setTitle,
 		setTaskLabel,
@@ -119,6 +187,7 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 		removeNote,
 		saveNote,
 		cancelEditNote,
+		clearDraft,
 		undo,
 		redo,
 	}

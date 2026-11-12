@@ -1,7 +1,7 @@
 import type { Note } from '~/types'
 
 import { NOTES_SAVE_DELAY } from '~/constants'
-import { cloneNote, saveNotes, loadNotes } from '~/utils'
+import { cloneNote, saveNotes, loadNotes, removeDraft } from '~/utils'
 
 export const useNotesStore = defineStore('notes', () => {
 	const notes = ref<Note[]>([])
@@ -20,7 +20,7 @@ export const useNotesStore = defineStore('notes', () => {
 
 	const removeNoteById = (id: string) => {
 		notes.value = notes.value.filter((note) => note.id !== id)
-
+		removeDraft(id)
 		saveNotesDebounced(notes.value)
 	}
 

@@ -19,6 +19,8 @@
 		isNotFound,
 		titleError,
 		draft,
+		hasStoreDraft,
+		restoreDraft,
 		addTask,
 		toggleTask,
 		setTitle,
@@ -27,6 +29,7 @@
 		saveNote,
 		removeNote,
 		cancelEditNote,
+		clearDraft,
 	} = useNoteEditor(noteId)
 
 	const { setStartText, commitTextOnBlur, commitTextOnPause } = useTextCommit()
@@ -53,6 +56,23 @@
 	const title = computed(() =>
 		isNew.value ? 'Создать новую заметку' : 'Редактировать заметку'
 	)
+
+	const offerDraftRestore = () => {
+		if (!hasStoreDraft) return
+
+		confirm({
+			title: 'Восстановить черновик?',
+			content: 'У этой заметки есть несохраненные изменения.',
+			confirmText: 'Восстановить',
+			cancelText: 'Отказаться',
+			onConfirm: restoreDraft,
+			onCancel: clearDraft,
+		})
+	}
+
+	onMounted(() => {
+		offerDraftRestore()
+	})
 </script>
 
 <template>
