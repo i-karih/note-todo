@@ -74,3 +74,25 @@ export const removeDraft = (noteId: string) => {
 		// хранилище недоступно
 	}
 }
+
+export const cleanupDrafts = (noteIds: string[]) => {
+	try {
+		const draftKeys = Object.keys(localStorage).filter((key) =>
+			key.startsWith(DRAFT_STORAGE_PREFIX)
+		)
+
+		for (const key of draftKeys) {
+			const noteId = key.slice(DRAFT_STORAGE_PREFIX.length)
+			const isOrphan = noteId !== 'new' && !noteIds.includes(noteId)
+
+			const raw = localStorage.getItem(key)
+			const data: NoteDraftStorage | null = raw ? JSON.parse(raw) : null
+
+			const isExired = !data || isDraftExpired(data.savedAt)
+
+			if (isOrphan || isExired) localStorage.removeItem(key)
+		}
+	} catch {
+		// хранилище недоступно
+	}
+}
