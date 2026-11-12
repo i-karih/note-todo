@@ -16,4 +16,9 @@ export type NoteInputValues = {
 	newValue: string
 }
 
+export type NoteStorage = {
+	version: number
+	notes: Note[]
+}
+
 export type TextCommitCallback = (values: NoteInputValues) => void

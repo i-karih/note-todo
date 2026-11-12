@@ -1,2 +1,3 @@
-export * from './note.ts'
-export * from './debounce.ts'
+export * from './note'
+export * from './debounce'
+export * from './storage'
