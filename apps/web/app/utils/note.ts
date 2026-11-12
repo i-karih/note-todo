@@ -1,13 +1,15 @@
 import type { Note, Task } from '~/types'
 
+import { createId } from './id'
+
 export const createEmptyTask = (): Task => ({
-	id: crypto.randomUUID(),
+	id: createId(),
 	label: '',
 	done: false,
 })
 
 export const createEmptyNote = (): Note => ({
-	id: crypto.randomUUID(),
+	id: createId(),
 	title: '',
 	tasks: [createEmptyTask()],
 })
