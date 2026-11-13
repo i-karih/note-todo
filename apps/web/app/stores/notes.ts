@@ -1,7 +1,9 @@
 import type { Note } from '~/types'
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 
 import { NOTES_SAVE_DELAY } from '~/constants'
-import { cloneNote, saveNotes, loadNotes, removeDraft } from '~/utils'
+import { cloneNote, debounce, loadNotes, removeDraft, saveNotes } from '~/utils'
 
 export const useNotesStore = defineStore('notes', () => {
 	const notes = ref<Note[]>([])

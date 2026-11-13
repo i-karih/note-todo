@@ -1,10 +1,15 @@
 import type { Note, NoteCommand, Task } from '~/types'
+import type { Ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import { HISTORY_LIMIT, NoteCommandType } from '~/constants'
 
 export const useNoteHistory = (draft: Ref<Note>, limit = HISTORY_LIMIT) => {
 	const undoStack = ref<NoteCommand[]>([])
 	const redoStack = ref<NoteCommand[]>([])
+
+	const canUndo = computed(() => undoStack.value.length > 0)
+	const canRedo = computed(() => redoStack.value.length > 0)
 
 	const findTask = (taskId: string) =>
 		draft.value.tasks.find((task) => task.id === taskId)
@@ -94,6 +99,8 @@ export const useNoteHistory = (draft: Ref<Note>, limit = HISTORY_LIMIT) => {
 	}
 
 	return {
+		canUndo,
+		canRedo,
 		recordCommand,
 		undo,
 		redo,

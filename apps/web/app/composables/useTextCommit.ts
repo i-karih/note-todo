@@ -1,6 +1,8 @@
 import type { NoteInputValues, TextCommitCallback } from '~/types'
+import { ref } from 'vue'
 
 import { HISTORY_DEBOUNCE_DELAY } from '~/constants'
+import { debounce } from '~/utils'
 
 export const useTextCommit = () => {
 	const valueForCommit = ref<NoteInputValues>({

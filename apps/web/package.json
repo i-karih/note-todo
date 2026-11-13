@@ -8,7 +8,9 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
-		"typecheck": "nuxt typecheck"
+		"typecheck": "nuxt typecheck",
+		"test": "vitest",
+		"test:run": "vitest run"
 	},
 	"dependencies": {
 		"@fontsource/golos-ui": "^4.5.3",
@@ -20,7 +22,9 @@
 		"vue-router": "^5.4.0"
 	},
 	"devDependencies": {
+		"happy-dom": "^21.0.4",
 		"typescript": "^5.9.3",
+		"vitest": "^5.1.0",
 		"vue-tsc": "^3.3.14"
 	}
 }
