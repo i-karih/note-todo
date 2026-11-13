@@ -145,12 +145,22 @@
 					</div>
 					<template #footer>
 						<div class="note-editor-form__actions">
-							<UIButton type="submit">Сохранить</UIButton>
-							<UIButton variant="secondary" @click="handleCancelEditNote">
+							<UIButton
+								class="note-editor-form__button"
+								type="submit"
+							>
+								Сохранить
+							</UIButton>
+							<UIButton
+								class="note-editor-form__button"
+								variant="secondary"
+								@click="handleCancelEditNote"
+							>
 								Отменить
 							</UIButton>
 							<UIButton
 								v-if="!isNew"
+								class="note-editor-form__button"
 								variant="secondary"
 								@click="handleRemoveNote"
 							>
@@ -227,6 +237,11 @@
 			display: flex;
 			gap: var(--spacing-200);
 			justify-content: flex-end;
+			flex-wrap: wrap;
+		}
+
+		&__button {
+			flex: 1 1 auto;
 		}
 	}
 

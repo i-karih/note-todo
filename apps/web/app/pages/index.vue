@@ -91,13 +91,17 @@
 			text-transform: uppercase;
 		}
 		&__list {
-			display: flex;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 			gap: var(--spacing-200);
+
+			@include md {
+				grid-template-columns: repeat(3, 1fr);
+			}
 		}
 
 		&__card {
 			width: 100%;
-			max-width: 300px;
 		}
 
 		&__empty {
