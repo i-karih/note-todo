@@ -7,7 +7,12 @@
 		UICard,
 	} from '@note-todo/ui'
 
-	import { useNoteEditor, useConfirm, useTextCommit } from '~/composables'
+	import {
+		useNoteEditor,
+		useConfirm,
+		useTextCommit,
+		useHistoryHotkeys,
+	} from '~/composables'
 
 	const route = useRoute()
 	const noteId = computed(() => String(route.params.id))
@@ -30,7 +35,11 @@
 		removeNote,
 		cancelEditNote,
 		clearDraft,
+		redo,
+		undo,
 	} = useNoteEditor(noteId)
+
+	useHistoryHotkeys(undo, redo)
 
 	const { setStartText, commitTextOnBlur, commitTextOnPause } = useTextCommit()
 
