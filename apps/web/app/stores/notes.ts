@@ -38,8 +38,7 @@ export const useNotesStore = defineStore('notes', () => {
 	}
 
 	const flushToStorage = () => {
-		saveNotesDebounced.cancel()
-		saveNotes(notes.value)
+		saveNotesDebounced.flush()
 	}
 
 	return {

@@ -3,13 +3,26 @@ export const debounce = <Args extends unknown[]>(
 	delay: number
 ) => {
 	let timer: ReturnType<typeof setTimeout> | undefined
+	let pendingArgs: Args | undefined
 
 	const debounced = (...args: Args) => {
+		pendingArgs = args
 		clearTimeout(timer)
-		timer = setTimeout(() => fn(...args), delay)
+		timer = setTimeout(debounced.flush, delay)
 	}
 
-	debounced.cancel = () => clearTimeout(timer)
+	debounced.cancel = () => {
+		clearTimeout(timer)
+		pendingArgs = undefined
+	}
+
+	debounced.flush = () => {
+		clearTimeout(timer)
+		if (!pendingArgs) return
+		const args = pendingArgs
+		pendingArgs = undefined
+		fn(...args)
+	}
 
 	return debounced
 }
