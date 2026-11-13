@@ -2,6 +2,7 @@
 	import { UICard, UIIconButton, UIButton } from '@note-todo/ui'
 
 	import { useConfirm } from '~/composables'
+	import { NOTE_PREVIEW_TASKS } from '~/constants'
 	import { useNotesStore } from '~/stores/notes.ts'
 
 	const confirm = useConfirm()
@@ -22,7 +23,12 @@
 		<div class="container">
 			<div class="todo__header">
 				<h1 class="todo__title text-display">Мои заметки</h1>
-				<UIIconButton name="plus" variant="primary" to="/notes/new" />
+				<UIIconButton
+					aria-label="Создать заметку"
+					name="plus"
+					variant="primary"
+					to="/notes/new"
+				/>
 			</div>
 			<div v-if="notesStore.hasNotes" class="todo__list">
 				<UICard
@@ -36,14 +42,18 @@
 							<h2 class="todo-card__title text-heading-m">
 								{{ note.title }}
 							</h2>
-							<UIIconButton name="edit" :to="`/notes/${note.id}`" />
+							<UIIconButton
+								:aria-label="`Редактировать заметку ${note.title}`"
+								name="edit"
+								:to="`/notes/${note.id}`"
+							/>
 						</div>
 					</template>
 
 					<template #default>
 						<ul class="todo-card__list">
 							<li
-								v-for="task in note.tasks"
+								v-for="task in note.tasks.slice(0, NOTE_PREVIEW_TASKS)"
 								:key="task.id"
 								:class="[
 									'todo-card__item',
@@ -53,11 +63,18 @@
 							>
 								{{ task.label }}
 							</li>
+							<li
+								v-if="note.tasks.length > NOTE_PREVIEW_TASKS"
+								class="todo-card__item todo-card__item--muted text-body-s"
+							>
+								и еще {{ note.tasks.length - NOTE_PREVIEW_TASKS }}
+							</li>
 						</ul>
 					</template>
 
 					<template #footer>
 						<UIButton
+							:aria-label="`Удалить заметку ${note.title}`"
 							variant="secondary"
 							class="todo-card__delete"
 							@click="handleRemoveNote(note.id)"
@@ -129,6 +146,10 @@
 		&__item {
 			&--done {
 				text-decoration: line-through;
+			}
+			&--muted {
+				text-align: right;
+				color: var(--text-muted);
 			}
 		}
 

@@ -136,7 +136,7 @@
 							>
 								<UICheckbox
 									v-model="task.done"
-									:aria-label="`Пункт ${index + 1} ${task.done ? 'выполнен' : 'не выполнен'}`"
+									:aria-label="`Пункт ${index + 1}`"
 									@update:model-value="toggleTask(task.id)"
 								/>
 								<UIInput

@@ -31,7 +31,13 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 
 	const isTitleEmpty = computed(() => !draft.value.title.trim())
 
-	const titleError = ref('')
+	const isSaveAttempted = ref(false)
+
+	const titleError = computed(() =>
+		isSaveAttempted.value && isTitleEmpty.value
+			? 'Поле обязательно для заполнения'
+			: ''
+	)
 
 	const storedDraft = isNotFound.value ? null : loadDraft(toValue(noteId))
 
@@ -52,21 +58,19 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 	}
 
 	const saveNote = () => {
-		if (isTitleEmpty.value) {
-			titleError.value = 'Поле обязательно для заполнения'
-		} else {
-			titleError.value = ''
+		isSaveAttempted.value = true
 
-			notesStore.saveNote({
-				...draft.value,
-				tasks: draft.value.tasks.filter((task) => task.label.trim()),
-			})
+		if (isTitleEmpty.value) return
 
-			clearHistory()
-			clearDraft()
+		notesStore.saveNote({
+			...draft.value,
+			tasks: draft.value.tasks.filter((task) => task.label.trim()),
+		})
 
-			navigateTo('/')
-		}
+		clearHistory()
+		clearDraft()
+
+		navigateTo('/')
 	}
 
 	const removeNote = async () => {
