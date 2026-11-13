@@ -70,6 +70,20 @@
 		})
 	}
 
+	const notifyNoteDeleted = () => {
+		confirm({
+			title: 'Заметка удалена',
+			content: 'Эту заметку удалили в другой вкладке.',
+			confirmText: 'На главную',
+			cancelText: 'Остаться',
+			onConfirm: () => navigateTo('/'),
+		})
+	}
+
+	watch(isNotFound, (isDeleted) => {
+		if (isDeleted) notifyNoteDeleted()
+	})
+
 	onMounted(() => {
 		offerDraftRestore()
 	})
