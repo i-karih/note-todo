@@ -145,10 +145,7 @@
 					</div>
 					<template #footer>
 						<div class="note-editor-form__actions">
-							<UIButton
-								class="note-editor-form__button"
-								type="submit"
-							>
+							<UIButton class="note-editor-form__button" type="submit">
 								Сохранить
 							</UIButton>
 							<UIButton
