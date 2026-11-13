@@ -11,6 +11,7 @@ export type InputProps = {
 	placeholder?: string
 	type?: 'text' | 'password' | 'email'
 	readonly?: boolean
+	ariaLabel?: string
 }
 
 export type InputSlots = {

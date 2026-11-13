@@ -18,6 +18,7 @@
 		readonly = false,
 		type = 'text',
 		label = '',
+		ariaLabel,
 	} = defineProps<InputProps>()
 
 	const slots = defineSlots<InputSlots>()
@@ -34,6 +35,7 @@
 		id,
 		class: 'ui-input__input',
 		'aria-describedby': hasMessage.value ? messageId.value : undefined,
+		'aria-label': ariaLabel,
 	}))
 
 	const emit = defineEmits<InputEmits>()

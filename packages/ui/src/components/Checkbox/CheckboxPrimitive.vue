@@ -1,7 +1,9 @@
 <script setup lang="ts">
+	import type { CheckboxPrimitiveProps } from './Checkbox.types'
+
 	const model = defineModel<boolean>()
 
-	const { disabled = false } = defineProps<{ disabled?: boolean }>()
+	const { disabled = false, ariaLabel } = defineProps<CheckboxPrimitiveProps>()
 </script>
 
 <template>
@@ -9,6 +11,7 @@
 		<input
 			v-model="model"
 			:disabled="disabled"
+			:aria-label="ariaLabel"
 			type="checkbox"
 			class="ui-checkbox-primitive__input"
 		/>

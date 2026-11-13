@@ -10,6 +10,7 @@
 		disabled = false,
 		label = '',
 		error = false,
+		ariaLabel,
 	} = defineProps<CheckboxProps>()
 
 	const slots = defineSlots<CheckboxSlots>()
@@ -19,6 +20,7 @@
 	<CheckboxPrimitive
 		v-model="model"
 		:disabled="disabled"
+		:aria-label="ariaLabel"
 		:class="[
 			'ui-checkbox',
 			{ 'ui-checkbox--disabled': disabled },
