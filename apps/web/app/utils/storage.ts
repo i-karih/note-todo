@@ -13,6 +13,9 @@ export const loadNotes = () => {
 		if (!raw) return []
 
 		const data: NoteStorage = JSON.parse(raw)
+
+		// Версия схемы одна, поэтому миграций нет. При смене формата данных
+		// здесь появятся миграции vN -> vN+1 вместо сброса к пустому списку.
 		return data.version === NOTES_SCHEMA_VERSION && Array.isArray(data.notes)
 			? data.notes
 			: []
