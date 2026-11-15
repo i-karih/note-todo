@@ -5,6 +5,7 @@ export type HeaderTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 export type ConfirmModalEmit = {
 	confirm: []
 	cancel: []
+	dismiss: []
 }
 
 export type ModalProps = {

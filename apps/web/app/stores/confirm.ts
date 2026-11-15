@@ -19,11 +19,16 @@ export const useConfirmStore = defineStore('confirm', () => {
 		isModalOpen.value = false
 	}
 
+	const dismiss = () => {
+		isModalOpen.value = false
+	}
+
 	return {
 		isModalOpen,
 		options,
 		open,
 		confirm,
 		cancel,
+		dismiss,
 	}
 })

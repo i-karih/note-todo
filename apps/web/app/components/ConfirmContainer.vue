@@ -17,5 +17,6 @@
 		:cancel-text="confirmStore.options?.cancelText"
 		@confirm="confirmStore.confirm"
 		@cancel="confirmStore.cancel"
+		@dismiss="confirmStore.dismiss"
 	/>
 </template>

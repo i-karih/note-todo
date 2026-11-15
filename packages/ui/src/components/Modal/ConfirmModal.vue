@@ -32,7 +32,9 @@
 	}
 
 	const onModalUpdate = (value: boolean | undefined) => {
-		if (!value) cancel()
+		if (value) return
+		model.value = false
+		emit('dismiss')
 	}
 </script>
 
