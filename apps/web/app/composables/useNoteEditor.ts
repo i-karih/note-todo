@@ -67,7 +67,7 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 			title: draft.value.title.trim(),
 			tasks: draft.value.tasks
 				.map((task) => ({ ...task, label: task.label.trim() }))
-				.filter((task) => task.label.trim()),
+				.filter((task) => task.label),
 		})
 
 		clearHistory()
