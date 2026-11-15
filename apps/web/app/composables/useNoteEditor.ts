@@ -64,7 +64,10 @@ export const useNoteEditor = (noteId: MaybeRefOrGetter<string>) => {
 
 		notesStore.saveNote({
 			...draft.value,
-			tasks: draft.value.tasks.filter((task) => task.label.trim()),
+			title: draft.value.title.trim(),
+			tasks: draft.value.tasks
+				.map((task) => ({ ...task, label: task.label.trim() }))
+				.filter((task) => task.label.trim()),
 		})
 
 		clearHistory()

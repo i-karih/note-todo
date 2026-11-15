@@ -88,9 +88,9 @@ export const cleanupDrafts = (noteIds: string[]) => {
 			const raw = localStorage.getItem(key)
 			const data: NoteDraftStorage | null = raw ? JSON.parse(raw) : null
 
-			const isExired = !data || isDraftExpired(data.savedAt)
+			const isExpired = !data || isDraftExpired(data.savedAt)
 
-			if (isOrphan || isExired) localStorage.removeItem(key)
+			if (isOrphan || isExpired) localStorage.removeItem(key)
 		}
 	} catch {
 		// хранилище недоступно
